@@ -21,11 +21,10 @@ public class LinearRegressionRun {
         Instances train = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\merged_train.arff");
         Instances test = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\merged_test.arff");
 
-        // Set target attribute (last column)
         
 
         Remove remove = new Remove();
-        remove.setAttributeIndices("1"); // Adjust indices if needed
+        remove.setAttributeIndices("1");
         //remove.setAttributeIndices("19-22");
         remove.setInputFormat(train);
         Instances filteredTrain = Filter.useFilter(train, remove);
@@ -34,7 +33,7 @@ public class LinearRegressionRun {
         filteredTrain.setClassIndex(filteredTrain.numAttributes() - 1);
         filteredTest.setClassIndex(filteredTest.numAttributes() - 1);
         
-        // Run Linear Regression
+        
         LinearRegression lr = new LinearRegression();
         lr.setAttributeSelectionMethod(new SelectedTag(LinearRegression.SELECTION_NONE, LinearRegression.TAGS_SELECTION));
 

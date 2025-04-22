@@ -5,37 +5,37 @@
 package com.mycompany.weka;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
-import weka.classifiers.trees.M5P;
+import weka.classifiers.functions.LinearRegression;
 import weka.classifiers.Evaluation;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.Remove;
+import weka.core.SelectedTag;
 
+import java.util.Random;
 /**
  *
  * @author DB
  */
-public class M5PRun {
+public class LinearRegression10f {
     public static void main(String[] args) throws Exception {
 
         Instances train = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\merged_train.arff");
-        Instances test = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\merged_test.arff");
-
-        train.setClassIndex(train.numAttributes() - 1);
-        test.setClassIndex(test.numAttributes() - 1);
 
         Remove remove = new Remove();
         remove.setAttributeIndices("1");
         remove.setInputFormat(train);
         Instances filteredTrain = Filter.useFilter(train, remove);
-        Instances filteredTest = Filter.useFilter(test, remove);
 
-        System.out.println("----- M5P Results -----");
-        M5P m5p = new M5P();
-        m5p.buildClassifier(filteredTrain);
+        filteredTrain.setClassIndex(filteredTrain.numAttributes() - 1);
 
-        Evaluation evalSVM = new Evaluation(filteredTrain);
-        evalSVM.evaluateModel(m5p, filteredTest);
-        System.out.println(evalSVM.toSummaryString());
-        
+        LinearRegression lr = new LinearRegression();
+        lr.setAttributeSelectionMethod(new SelectedTag(LinearRegression.SELECTION_NONE, LinearRegression.TAGS_SELECTION));
+
+        Evaluation evalCV = new Evaluation(filteredTrain);
+        evalCV.crossValidateModel(lr, filteredTrain, 10, new Random(1));
+        System.out.println("----- 10-Fold Cross-Validation on Training Data -----");
+        System.out.println(evalCV.toSummaryString());
+
+
     }
 }
