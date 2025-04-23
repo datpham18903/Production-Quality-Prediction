@@ -9,8 +9,7 @@ import weka.classifiers.Evaluation;
 import weka.classifiers.trees.REPTree;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
-import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.Remove;
+
 
 /**
  *
@@ -19,14 +18,9 @@ import weka.filters.unsupervised.attribute.Remove;
 public class REPTreef10 {
     public static void main(String[] args) throws Exception {
 
-        Instances train = ConverterUtils.DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\merged_train.arff");
+        Instances filteredTrain = ConverterUtils.DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\data_compressed.arff");
 
-        train.setClassIndex(train.numAttributes() - 1);
-
-        Remove remove = new Remove();
-        remove.setAttributeIndices("1");
-        remove.setInputFormat(train);
-        Instances filteredTrain = Filter.useFilter(train, remove);
+        filteredTrain.setClassIndex(filteredTrain.numAttributes() - 1);
 
         REPTree rep = new REPTree();
         

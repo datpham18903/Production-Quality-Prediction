@@ -8,9 +8,7 @@ import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 import weka.classifiers.rules.ZeroR;
 import weka.classifiers.Evaluation;
-import weka.classifiers.trees.M5P;
-import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.Remove;
+
 /**
  *
  * @author DB
@@ -18,18 +16,14 @@ import weka.filters.unsupervised.attribute.Remove;
 public class ZeroRf10 {
     public static void main(String[] args) throws Exception {
 
-        Instances train = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\merged_train.arff");
+        Instances train = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\data_compressed.arff");
 
-        Remove remove = new Remove();
-        remove.setAttributeIndices("1");
-        remove.setInputFormat(train);
-        Instances filteredTrain = Filter.useFilter(train, remove);
 
-        filteredTrain.setClassIndex(filteredTrain.numAttributes() - 1);
+        train.setClassIndex(train.numAttributes() - 1);
 
         ZeroR zero = new ZeroR();
-        Evaluation eval = new Evaluation(filteredTrain);
-        eval.crossValidateModel(zero, filteredTrain, 10, new Random(1));
+        Evaluation eval = new Evaluation(train);
+        eval.crossValidateModel(zero, train, 10, new Random(1));
 
         
         System.out.println("----- ZeroR 10-Fold Cross-Validation Results -----");

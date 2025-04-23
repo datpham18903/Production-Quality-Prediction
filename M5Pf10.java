@@ -20,19 +20,16 @@ import java.util.Random;
 public class M5Pf10 {
     public static void main(String[] args) throws Exception {
 
-        Instances train = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\merged_train.arff");
+        Instances train = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\data_compressed.arff");
 
-        Remove remove = new Remove();
-        remove.setAttributeIndices("1");
-        remove.setInputFormat(train);
-        Instances filteredTrain = Filter.useFilter(train, remove);
 
-        filteredTrain.setClassIndex(filteredTrain.numAttributes() - 1);
+
+        train.setClassIndex(train.numAttributes() - 1);
 
         M5P m5p = new M5P();
-        m5p.setMinNumInstances(4);
-        Evaluation eval = new Evaluation(filteredTrain);
-        eval.crossValidateModel(m5p, filteredTrain, 10, new Random(1));
+        
+        Evaluation eval = new Evaluation(train);
+        eval.crossValidateModel(m5p, train, 10, new Random(1));
 
         
         System.out.println("----- M5P 10-Fold Cross-Validation Results -----");
