@@ -1,41 +1,39 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.weka;
-import weka.classifiers.trees.REPTree;
+
 import weka.classifiers.Evaluation;
+import weka.classifiers.trees.REPTree;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
-import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.Remove;
+
+import java.util.Random;
+
 /**
- *
+ * REPTree model runner with 10-fold cross-validation and test evaluation
  * @author DB
  */
-public class REPTreeRun {
+public class REPTreerun {
     public static void main(String[] args) throws Exception {
 
-        Instances train = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\train_data_compressed.arff");
-        Instances test = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\test_data_compressed.arff");
+        // Load datasets
+        Instances filteredTrain = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\train_data.arff");
+        Instances filteredTest = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\test_data.arff");
 
+        // Set class index to the last attribute
+        filteredTrain.setClassIndex(filteredTrain.numAttributes() - 1);
+        filteredTest.setClassIndex(filteredTest.numAttributes() - 1);
 
-        train.setClassIndex(train.numAttributes() - 1);
-        test.setClassIndex(test.numAttributes() - 1);
+        // === 10-Fold Cross-Validation on Training Data ===
+        REPTree repTree = new REPTree();
+        Evaluation evalCV = new Evaluation(filteredTrain);
+        evalCV.crossValidateModel(repTree, filteredTrain, 10, new Random(1));
+        System.out.println("----- REPTree 10-Fold Cross-Validation Results on Training Data -----");
+        System.out.println(evalCV.toSummaryString());
 
-        Remove remove = new Remove();
-        remove.setAttributeIndices("1");
-        remove.setInputFormat(train);
-        Instances filteredTrain = Filter.useFilter(train, remove);
-        Instances filteredTest = Filter.useFilter(test, remove);
-
-        REPTree rep = new REPTree();
-        rep.buildClassifier(filteredTrain);
-        Evaluation eval = new Evaluation(filteredTrain);
-        eval.evaluateModel(rep, filteredTest);
-
-        System.out.println("----- REPTree Results -----");
-        System.out.println(eval.toSummaryString());
-        
+        // === Train on Full Training Set and Evaluate on Test Set ===
+        repTree.buildClassifier(filteredTrain);
+        Evaluation evalTest = new Evaluation(filteredTrain);
+        evalTest.evaluateModel(repTree, filteredTest);
+        System.out.println("----- REPTree Evaluation on Separate Test Data -----");
+        System.out.println(evalTest.toSummaryString());
     }
 }

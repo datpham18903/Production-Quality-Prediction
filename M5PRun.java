@@ -1,41 +1,39 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.weka;
+
+import weka.classifiers.Evaluation;
+import weka.classifiers.trees.M5P;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
-import weka.classifiers.trees.M5P;
-import weka.classifiers.Evaluation;
-import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.Remove;
+
+import java.util.Random;
 
 /**
- *
+ * M5P model runner with cross-validation and test evaluation
  * @author DB
  */
-public class M5PRun {
+public class M5Prun {
     public static void main(String[] args) throws Exception {
 
-        Instances train = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\train_data_compressed.arff");
-        Instances test = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\test_data_compressed.arff");
+        // Load datasets
+        Instances filteredTrain = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\train_data.arff");
+        Instances filteredTest = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\test_data.arff");
 
-        train.setClassIndex(train.numAttributes() - 1);
-        test.setClassIndex(test.numAttributes() - 1);
+        // Set class index to the last attribute
+        filteredTrain.setClassIndex(filteredTrain.numAttributes() - 1);
+        filteredTest.setClassIndex(filteredTest.numAttributes() - 1);
 
-        Remove remove = new Remove();
-        remove.setAttributeIndices("1");
-        remove.setInputFormat(train);
-        Instances filteredTrain = Filter.useFilter(train, remove);
-        Instances filteredTest = Filter.useFilter(test, remove);
-
-        System.out.println("----- M5P Results -----");
+        // === 10-Fold Cross-Validation on Training Data ===
         M5P m5p = new M5P();
-        m5p.buildClassifier(filteredTrain);
+        Evaluation evalCV = new Evaluation(filteredTrain);
+        evalCV.crossValidateModel(m5p, filteredTrain, 10, new Random(1));
+        System.out.println("----- M5P 10-Fold Cross-Validation Results on Training Data -----");
+        System.out.println(evalCV.toSummaryString());
 
-        Evaluation evalSVM = new Evaluation(filteredTrain);
-        evalSVM.evaluateModel(m5p, filteredTest);
-        System.out.println(evalSVM.toSummaryString());
-        
+        // === Train on Full Training Set and Evaluate on Test Set ===
+        m5p.buildClassifier(filteredTrain);
+        Evaluation evalTest = new Evaluation(filteredTrain);
+        evalTest.evaluateModel(m5p, filteredTest);
+        System.out.println("----- M5P Evaluation on Separate Test Data -----");
+        System.out.println(evalTest.toSummaryString());
     }
 }

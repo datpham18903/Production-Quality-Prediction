@@ -1,40 +1,39 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.weka;
+
+import weka.classifiers.Evaluation;
+import weka.classifiers.rules.ZeroR;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
-import weka.classifiers.rules.ZeroR;
-import weka.classifiers.Evaluation;
-import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.Remove;
+
+import java.util.Random;
+
 /**
- *
+ * ZeroR model runner with cross-validation and test evaluation
  * @author DB
  */
-public class ZeroRRun {
+public class ZeroRrun {
     public static void main(String[] args) throws Exception {
 
-        Instances train = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\train_data_compressed.arff");
-        Instances test = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\test_data_compressed.arff");
+        // Load datasets
+        Instances filteredTrain = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\train_data.arff");
+        Instances filteredTest = DataSource.read("C:\\Users\\DB\\Documents\\NetBeansProjects\\weka\\src\\main\\java\\data\\test_data.arff");
 
-        train.setClassIndex(train.numAttributes() - 1);
-        test.setClassIndex(test.numAttributes() - 1);
+        // Set class index to the last attribute
+        filteredTrain.setClassIndex(filteredTrain.numAttributes() - 1);
+        filteredTest.setClassIndex(filteredTest.numAttributes() - 1);
 
-        Remove remove = new Remove();
-        remove.setAttributeIndices("1");
-        remove.setInputFormat(train);
-        Instances filteredTrain = Filter.useFilter(train, remove);
-        Instances filteredTest = Filter.useFilter(test, remove);
+        // === 10-Fold Cross-Validation on Training Data ===
+        ZeroR zeroR = new ZeroR();
+        Evaluation evalCV = new Evaluation(filteredTrain);
+        evalCV.crossValidateModel(zeroR, filteredTrain, 10, new Random(1));
+        System.out.println("----- ZeroR 10-Fold Cross-Validation Results on Training Data -----");
+        System.out.println(evalCV.toSummaryString());
 
-        ZeroR zero = new ZeroR();
-        zero.buildClassifier(filteredTrain);
-        Evaluation eval = new Evaluation(filteredTrain);
-        eval.evaluateModel(zero, filteredTest);
-
-        System.out.println("----- ZeroR Results -----");
-        System.out.println(eval.toSummaryString());
-        
+        // === Train on Full Training Set and Evaluate on Test Set ===
+        zeroR.buildClassifier(filteredTrain);
+        Evaluation evalTest = new Evaluation(filteredTrain);
+        evalTest.evaluateModel(zeroR, filteredTest);
+        System.out.println("----- ZeroR Evaluation on Separate Test Data -----");
+        System.out.println(evalTest.toSummaryString());
     }
 }
