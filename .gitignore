@@ -1,0 +1,6 @@
+data
+lib
+.vscode
+.idea
+*.iml
+*.bat
