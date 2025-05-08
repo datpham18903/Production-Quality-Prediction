@@ -87,23 +87,16 @@ code/
 
 2. Navigate to the project directory
 
-3. Run a model using one of these methods:
+3. Run a model using one of the following commands:
 
-   **Method 1 (PowerShell):**
+   **For PowerShell:**
    ```
    .\run.bat [algorithm]
    ```
 
-   **Method 2 (Simpler option - create a function):**
-
-   Run this once in your PowerShell session:
-   ```bash
-   function run { & ".\run.bat" $args }
+   **For Command Prompt:**
    ```
-
-   Then you can run directly:
-   ```bash
-   run [algorithm]
+   run.bat [algorithm]
    ```
    
    Available algorithms:
@@ -124,18 +117,21 @@ code/
 ## Examples
 
 Run k-nearest neighbors algorithm:
-```bash
-run IBk
+```
+.\run.bat IBk     # For PowerShell
+run.bat IBk       # For Command Prompt
 ```
 
 Run linear regression:
-```bash
-run LinearRegression
+```
+.\run.bat LinearRegression     # For PowerShell
+run.bat LinearRegression       # For Command Prompt
 ```
 
 Run M5P decision tree:
-```bash
-run M5P
+```
+.\run.bat M5P     # For PowerShell
+run.bat M5P       # For Command Prompt
 ```
 
 ## Project Workflow
