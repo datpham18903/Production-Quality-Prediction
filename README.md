@@ -95,7 +95,7 @@ code/
    ```
 
    **Method 2 (Simpler option - create a function):**
-   ```powershell
+   ```
    # Run this once in your PowerShell session
    function run { & ".\run.bat" $args }
    
