@@ -104,16 +104,17 @@ code/
    ```
    
    Available algorithms:
-   - IBk - k-nearest neighbor classifier
-   - LinearRegression - linear regression model
-   - M5P - M5P decision tree for regression
-   - REPTree - fast decision tree learner
-   - ZeroR - predicts the mean value (baseline)
-   - RandomForest - random forest classifier
-   - SMOreg - support vector machine for regression
-   - Bagging - bagging ensemble method
-   - Stacking - stacking ensemble method
-   - MLP - multilayer perceptron neural network
+   - IBk - k-Nearest Neighbor Classifier
+   - LinearRegression - Linear Regression Model
+   - M5P - M5P Decision Tree for Regression
+   - REPTree - Fast Decision Tree Learner
+   - ZeroR - Predicts the Mean Value (Baseline)
+   - RandomForest - Random Forest Classifier
+   - SMOreg - Support Vector Machine for Regression
+   - Bagging - Bagging Ensemble Method
+   - Stacking - Stacking Ensemble Method
+   - MLP - Multilayer Perceptron Neural Network
+   - SimpleKMeans - K-Means Clustering
 
 4. The model will run with the default dataset configuration
 
