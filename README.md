@@ -95,15 +95,14 @@ code/
    ```
 
    **Method 2 (Simpler option - create a function):**
-   - Run this once in your PowerShell session
-   
-   ```
+
+   Run this once in your PowerShell session:
+   ```bash
    function run { & ".\run.bat" $args }
    ```
 
-   - Then you can run directly
-   
-   ```
+   Then you can run directly:
+   ```bash
    run [algorithm]
    ```
    
