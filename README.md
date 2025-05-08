@@ -114,26 +114,6 @@ code/
 
 4. The model will run with the default dataset configuration
 
-## Examples
-
-Run k-nearest neighbors algorithm:
-```
-.\run.bat IBk     # For PowerShell
-run.bat IBk       # For Command Prompt
-```
-
-Run linear regression:
-```
-.\run.bat LinearRegression     # For PowerShell
-run.bat LinearRegression       # For Command Prompt
-```
-
-Run M5P decision tree:
-```
-.\run.bat M5P     # For PowerShell
-run.bat M5P       # For Command Prompt
-```
-
 ## Project Workflow
 
 The main workflow for each model:
