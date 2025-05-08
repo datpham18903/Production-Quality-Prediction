@@ -100,8 +100,9 @@ code/
    ```
    function run { & ".\run.bat" $args }
    ```
-   - Then you can run directly
 
+   - Then you can run directly
+   
    ```
    run [algorithm]
    ```
