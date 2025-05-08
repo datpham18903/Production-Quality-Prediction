@@ -96,10 +96,12 @@ code/
 
    **Method 2 (Simpler option - create a function):**
    - Run this once in your PowerShell session
+   
    ```
    function run { & ".\run.bat" $args }
    ```
    - Then you can run directly
+
    ```
    run [algorithm]
    ```
