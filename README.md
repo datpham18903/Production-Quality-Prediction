@@ -1,6 +1,29 @@
-# Machine Learning Model Framework
+# Production Quality Prediction - A Machine Learning Model Framework
 
-A Java-based machine learning framework for quality prediction using the Weka library. This project implements various machine learning algorithms to analyze and predict data patterns.
+A Java-based machine learning framework for production quality prediction using the Weka library. This project implements various machine learning algorithms to analyze and predict data patterns.
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/datpham18903/Production-Quality-Prediction.git
+   ```
+
+2. Install dependencies using Maven:
+   ```bash
+   cd Production-Quality-Prediction
+   mvn clean install
+   ```
+
+## Dependencies
+
+- Java 11 or higher
+- Maven 3.6 or higher
+- Weka 3.8.6
+- JFreeChart 1.5.3
+- LibSVM 3.24
+- MTJ 1.0.4
+- Other dependencies are listed in `pom.xml`
 
 ## Project Structure
 
@@ -58,12 +81,6 @@ code/
 3. **Command-line Interface**
    - Easy-to-use batch script for running models
 
-## Requirements
-
-- Java 11 or higher
-- Maven for dependency management
-- Windows environment (for batch script)
-
 ## How to Run
 
 1. Ensure you have Java and Maven installed on your system
@@ -92,17 +109,17 @@ code/
 ## Examples
 
 Run k-nearest neighbors algorithm:
-```
+```bash
 run.bat IBk
 ```
 
 Run linear regression:
-```
+```bash
 run.bat LinearRegression
 ```
 
 Run M5P decision tree:
-```
+```bash
 run.bat M5P
 ```
 
@@ -116,10 +133,47 @@ The main workflow for each model:
 4. Evaluate the model's performance
 5. Display results and metrics
 
-## Extensibility
+## Troubleshooting
 
-The framework is designed to be easily extended:
+Common issues and solutions:
 
-- New models can be added by creating new Java classes following the existing patterns
-- Trained models are saved for future use
-- Common utilities handle file paths and model execution
+1. **OutOfMemoryError**
+   - Increase JVM heap size in run.bat: `java -Xmx4g -jar ...`
+   - Reduce dataset size or use data sampling
+
+2. **Model not found error**
+   - Ensure model files exist in the models/ directory
+   - Try retraining the model
+   - Check file permissions
+
+3. **Java version mismatch**
+   - Ensure you're using Java 11 or higher
+   - Check JAVA_HOME environment variable
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature-name`
+3. Commit changes: `git commit -am 'Add feature'`
+4. Push to branch: `git push origin feature-name`
+5. Submit a Pull Request
+
+### Adding New Models
+
+To add a new model:
+
+1. Create a new class in appropriate package (baseline/clustering/ensemble)
+2. Implement the required model interface
+3. Add model to run.bat script
+4. Update documentation
+5. Add tests
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Weka library developers
+- Contributors and maintainers
+- [List any other acknowledgments]
