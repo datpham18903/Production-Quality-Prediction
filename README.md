@@ -11,7 +11,7 @@ A Java-based machine learning framework for production quality prediction using 
 
 2. Install dependencies using Maven:
    ```bash
-   cd Production-Quality-Prediction
+   cd Production-Quality-Prediction/code
    mvn clean install
    ```
 
@@ -87,9 +87,20 @@ code/
 
 2. Navigate to the project directory
 
-3. Run a model using the batch file:
+3. Run a model using one of these methods:
+
+   **Method 1 (PowerShell):**
    ```
-   run.bat [algorithm]
+   .\run.bat [algorithm]
+   ```
+
+   **Method 2 (Simpler option - create a function):**
+   ```powershell
+   # Run this once in your PowerShell session
+   function run { & ".\run.bat" $args }
+   
+   # Then you can run directly
+   run [algorithm]
    ```
    
    Available algorithms:
@@ -110,17 +121,17 @@ code/
 
 Run k-nearest neighbors algorithm:
 ```bash
-run.bat IBk
+run IBk
 ```
 
 Run linear regression:
 ```bash
-run.bat LinearRegression
+run LinearRegression
 ```
 
 Run M5P decision tree:
 ```bash
-run.bat M5P
+run M5P
 ```
 
 ## Project Workflow
