@@ -166,5 +166,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 - Weka library developers
-- Contributors and maintainers
-- [List any other acknowledgments]
