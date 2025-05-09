@@ -19,11 +19,6 @@ A Java-based machine learning framework for production quality prediction using 
 
 - Java 11 or higher
 - Maven 3.6 or higher
-- Weka 3.8.6
-- JFreeChart 1.5.3
-- LibSVM 3.24
-- MTJ 1.0.4
-- Other dependencies are listed in `pom.xml`
 
 ## Project Structure
 
