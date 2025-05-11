@@ -19,8 +19,7 @@ A Java-based machine learning framework for production quality prediction using 
 
 - Java 11 or higher
 - Maven 3.6 or higher
-- Python 3.x (for data preprocessing)
-- Jupyter Notebook (for running preprocessing scripts)
+- Python 3.x 
 
 ## Project Structure
 
@@ -125,9 +124,28 @@ code/
 
 4. For testing specific models, use the test script:
 
+   **For PowerShell:**
    ```
-   test.bat [model_name]
+   .\test.bat [model]
    ```
+
+   **For Command Prompt:**
+   ```
+   test.bat [model]
+   ```
+   
+   Available models:
+   - IBK - k-Nearest Neighbor Classifier
+   - LINEARREGRESSION - Linear Regression Model
+   - M5P - M5P Decision Tree for Regression
+   - REPTREE - Fast Decision Tree Learner
+   - ZEROR - Predicts the Mean Value (Baseline)
+   - RANDOMFOREST - Random Forest Classifier
+   - SMOREG - Support Vector Machine for Regression
+   - BAGGING - Bagging Ensemble Method
+   - STACKING - Stacking Ensemble Method
+   - MLP - Multilayer Perceptron Neural Network
+   - SIMPLEKMEANS - K-Means Clustering (Clusterer type)
 
 5. The model will run with the default dataset configuration
 
