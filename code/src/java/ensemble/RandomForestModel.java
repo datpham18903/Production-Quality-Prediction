@@ -1,4 +1,4 @@
-package others;
+package ensemble;
 
 import util.ModelRunner;
 import weka.classifiers.trees.RandomForest;
