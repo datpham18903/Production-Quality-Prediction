@@ -20,15 +20,15 @@ if /i "%1"=="IBk" (
 ) else if /i "%1"=="ZeroR" (
     set "mainClass=baseline.ZeroRModel"
 ) else if /i "%1"=="RandomForest" (
-    set "mainClass=clustering.RandomForestModel"
+    set "mainClass=others.RandomForestModel"
 ) else if /i "%1"=="SMOreg" (
-    set "mainClass=clustering.SMOregModel"
+    set "mainClass=others.SMOregModel"
 ) else if /i "%1"=="Bagging" (
     set "mainClass=ensemble.BaggingModel"
 ) else if /i "%1"=="Stacking" (
     set "mainClass=ensemble.StackingModel"
 ) else if /i "%1"=="MLP" (
-    set "mainClass=clustering.MultiLayerPerceptronModel"
+    set "mainClass=others.MultiLayerPerceptronModel"
 ) else if /i "%1"=="SimpleKMeans" (
     set "mainClass=clustering.SimpleKMeansModel"
 ) else (
