@@ -19,6 +19,8 @@ A Java-based machine learning framework for production quality prediction using 
 
 - Java 11 or higher
 - Maven 3.6 or higher
+- Python 3.x (for data preprocessing)
+- Jupyter Notebook (for running preprocessing scripts)
 
 ## Project Structure
 
@@ -39,10 +41,17 @@ code/
 │   │   ├── ensemble/               # Ensemble methods
 │   │   │   ├── BaggingModel.java   # Bagging ensemble
 │   │   │   └── StackingModel.java  # Stacking ensemble
+│   │   ├── others/                 # Additional model implementations & testing
+│   │   │   ├── MultiLayerPerceptronModel.java
+│   │   │   ├── RandomForestModel.java
+│   │   │   ├── SMOregModel.java
+│   │   │   └── SampleTesting.java  # Sample testing implementation
 │   │   └── util/                   # Utility classes
 │   │       ├── ModelLoader.java    # Loads serialized models
 │   │       ├── ModelRunner.java    # Common code for running models
 │   │       └── PathUtils.java      # File path resolution utilities
+│   ├── python/                     # Python scripts for data preprocessing
+│   │   └── preprocessing.ipynb     # Jupyter notebook for data preprocessing
 │   └── datasets/                   # Training and test datasets
 │       ├── train_data.arff
 │       └── test_data.arff
@@ -52,8 +61,10 @@ code/
 │   ├── M5P                         # M5P decision tree model file
 │   ├── REPTREE                     # REPTree model file
 │   └── ZEROR                       # ZeroR model file
+├── lib/                            # Additional libraries
 ├── pom.xml                         # Maven configuration file
-└── run.bat                         # Batch script to run models
+├── run.bat                         # Batch script to run models
+└── test.bat                        # Batch script for testing models
 ```
 
 ## Features
@@ -72,9 +83,14 @@ code/
 2. **Model Persistence**
    - Ability to save trained models
    - Loading pre-trained models for prediction
+   - Serialized model storage for efficient reuse
 
 3. **Command-line Interface**
-   - Easy-to-use batch script for running models
+   - Easy-to-use batch scripts for running and testing models
+
+4. **Data Preprocessing**
+   - Python-based data preprocessing capabilities
+   - Jupyter notebook for interactive data exploration and transformation
 
 ## How to Run
 
@@ -107,17 +123,25 @@ code/
    - MLP - Multilayer Perceptron Neural Network
    - SimpleKMeans - K-Means Clustering
 
-4. The model will run with the default dataset configuration
+4. For testing specific models, use the test script:
+
+   ```
+   test.bat [model_name]
+   ```
+
+5. The model will run with the default dataset configuration
 
 ## Project Workflow
 
 The main workflow for each model:
 
-1. Load data from ARFF files
-2. Prepare and preprocess the data
-3. Train the specified model
-4. Evaluate the model's performance
-5. Display results and metrics
+1. Preprocess data using Python scripts (preprocessing.ipynb)
+2. Load data from ARFF files
+3. Prepare and preprocess the data
+4. Train the specified model
+5. Evaluate the model's performance
+6. Display results and metrics
+7. Save model for future use
 
 ## Troubleshooting
 
@@ -135,6 +159,10 @@ Common issues and solutions:
 3. **Java version mismatch**
    - Ensure you're using Java 11 or higher
    - Check JAVA_HOME environment variable
+
+4. **Python dependency issues**
+   - Install required Python packages for data preprocessing: `pip install jupyter pandas numpy scikit-learn matplotlib seaborn liac-arff`
+   - Ensure correct Python version is installed
 
 ## Contributing
 
@@ -161,3 +189,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 - Weka library developers
+- Contributors to the scikit-learn and pandas libraries
