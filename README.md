@@ -24,46 +24,51 @@ A Java-based machine learning framework for production quality prediction using 
 ## Project Structure
 
 ```
-code/
-├── src/
-│   ├── java/
-│   │   ├── baseline/               # Baseline prediction models
-│   │   │   ├── IBkModel.java       # k-nearest neighbor model
-│   │   │   ├── LinearRegressionModel.java
-│   │   │   ├── M5PModel.java       # M5P decision tree for regression
-│   │   │   ├── REPTreeModel.java   # Fast decision tree learner
-│   │   │   └── ZeroRModel.java     # Baseline predictor (mean value)
-│   │   ├── clustering/             # Clustering & additional models
-│   │   │   ├── MultiLayerPerceptronModel.java
-│   │   │   ├── RandomForestModel.java
-│   │   │   └── SMOregModel.java    # Support vector machine for regression
-│   │   ├── ensemble/               # Ensemble methods
-│   │   │   ├── BaggingModel.java   # Bagging ensemble
-│   │   │   └── StackingModel.java  # Stacking ensemble
-│   │   ├── others/                 # Additional model implementations & testing
-│   │   │   ├── MultiLayerPerceptronModel.java
-│   │   │   ├── RandomForestModel.java
-│   │   │   ├── SMOregModel.java
-│   │   │   └── SampleTesting.java  # Sample testing implementation
-│   │   └── util/                   # Utility classes
-│   │       ├── ModelLoader.java    # Loads serialized models
-│   │       ├── ModelRunner.java    # Common code for running models
-│   │       └── PathUtils.java      # File path resolution utilities
-│   ├── python/                     # Python scripts for data preprocessing
-│   │   └── preprocessing.ipynb     # Jupyter notebook for data preprocessing
-│   └── datasets/                   # Training and test datasets
-│       ├── train_data.arff
-│       └── test_data.arff
-├── models/                         # Serialized trained models
-│   ├── IBK                         # k-nearest neighbors model file
-│   ├── LINEARREGRESSION            # Linear regression model file
-│   ├── M5P                         # M5P decision tree model file
-│   ├── REPTREE                     # REPTree model file
-│   └── ZEROR                       # ZeroR model file
-├── lib/                            # Additional libraries
-├── pom.xml                         # Maven configuration file
-├── run.bat                         # Batch script to run models
-└── test.bat                        # Batch script for testing models
+.
+├── code/
+│   ├── src/
+│   │   ├── java/
+│   │   │   ├── baseline/               # Baseline prediction models
+│   │   │   │   ├── IBkModel.java       # k-nearest neighbor model
+│   │   │   │   ├── LinearRegressionModel.java
+│   │   │   │   ├── M5PModel.java       # M5P decision tree for regression
+│   │   │   │   ├── REPTreeModel.java   # Fast decision tree learner
+│   │   │   │   └── ZeroRModel.java     # Baseline predictor (mean value)
+│   │   │   ├── clustering/             # Clustering models
+│   │   │   │   ├── MultiLayerPerceptronModel.java
+│   │   │   │   ├── RandomForestModel.java
+│   │   │   │   └── SMOregModel.java    # Support vector machine for regression
+│   │   │   ├── ensemble/               # Ensemble methods
+│   │   │   │   ├── BaggingModel.java   # Bagging ensemble
+│   │   │   │   └── StackingModel.java  # Stacking ensemble
+│   │   │   ├── others/                 # Additional implementations
+│   │   │   │   ├── MultiLayerPerceptronModel.java
+│   │   │   │   ├── RandomForestModel.java
+│   │   │   │   ├── SMOregModel.java
+│   │   │   │   └── SampleTesting.java  # Sample testing implementation
+│   │   │   └── util/                   # Utility classes
+│   │   │       ├── ModelLoader.java    # Loads serialized models
+│   │   │       ├── ModelRunner.java    # Common code for running models
+│   │   │       └── PathUtils.java      # File path resolution utilities
+│   │   ├── python/                     # Python scripts for data preprocessing
+│   │   │   └── preprocessing.ipynb     # Jupyter notebook for data preprocessing
+│   │   └── datasets/                   # Training and test datasets
+│   │       ├── train_data.arff        # Training dataset
+│   │       ├── test_data.arff         # Test dataset
+│   │       └── sample_data.arff       # Sample dataset
+│   ├── models/                         # Serialized trained models
+│   │   ├── IBK                        # k-nearest neighbors model
+│   │   ├── LINEARREGRESSION           # Linear regression model
+│   │   ├── M5P                        # M5P model
+│   │   ├── REPTREE                    # REPTree model
+│   │   ├── SIMPLEKMEANS              # K-means clustering model
+│   │   └── ZEROR                      # ZeroR baseline model
+│   ├── lib/                           # Additional libraries
+│   ├── pom.xml                        # Maven configuration file
+│   ├── run.bat                        # Batch script to run models
+│   └── test.bat                       # Batch script for testing models
+├── .gitignore                         # Git ignore file
+└── README.md                          # Project documentation
 ```
 
 ## Features
