@@ -91,6 +91,16 @@ code/
    - Python-based data preprocessing capabilities
    - Jupyter notebook for interactive data exploration and transformation
 
+## Model Size Limitations
+
+Due to file size limitations, some larger serialized model files (BAGGING, STACKING, and RANDOMFOREST) are not included in the repository. The source code for these models (BaggingModel.java, StackingModel.java, and RandomForestModel.java) is still available in the codebase, and you can:
+
+1. Train these models locally using the provided source code
+2. Use model compression techniques for the serialized files
+3. Consider using model quantization or pruning to reduce model size
+
+Note: While the serialized model files are not included, all source code files are maintained in the repository, allowing you to train and generate these models locally.
+
 ## How to Run
 
 1. Ensure you have Java and Maven installed on your system
